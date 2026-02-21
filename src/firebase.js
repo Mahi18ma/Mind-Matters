@@ -22,9 +22,21 @@ export const FIREBASE_CONFIGURED = !!(
     import.meta.env.VITE_FIREBASE_API_KEY !== 'paste-your-apiKey-here'
 );
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+// Only initialise Firebase when credentials are actually present.
+// Without this guard, initializeApp() throws with undefined values, which
+// crashes the entire app at module load time → white screen on Vercel.
+let app = null;
+export let auth = null;
+export let db = null;
 
-// Analytics — only loads in browsers that support it (no SSR crash)
-isSupported().then(yes => { if (yes) getAnalytics(app); });
+if (FIREBASE_CONFIGURED) {
+    try {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        // Analytics — only loads in browsers that support it
+        isSupported().then(yes => { if (yes) getAnalytics(app); });
+    } catch (err) {
+        console.warn('Firebase failed to initialise — running in offline mode.', err);
+    }
+}
