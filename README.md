@@ -107,19 +107,28 @@ VITE_GEMINI_API_KEY=your-gemini-api-key
 
 ## 📸 Screenshots
 
-> _Screenshots from the live deployment_
-
-| Home Dashboard | Journal + AI Analysis |
-|---|---|
-| ![Home](./docs/screenshots/home.png) | ![Journal](./docs/screenshots/journal.png) |
-
-| Guided Breathing | Focus Mode |
-|---|---|
-| ![Breathing](./docs/screenshots/breathing.png) | ![Focus](./docs/screenshots/focus.png) |
-
-| Mood Calendar | Motivational Quotes |
-|---|---|
-| ![Calendar](./docs/screenshots/calendar.png) | ![Quotes](./docs/screenshots/quotes.png) |
+<table>
+  <tr>
+    <td align="center"><strong>🏠 Home Dashboard</strong></td>
+    <td align="center"><strong>📓 Journal</strong></td>
+    <td align="center"><strong>🧘 Guided Breathing</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./docs/screenshots/home.png" width="260" alt="Home Dashboard"/></td>
+    <td><img src="./docs/screenshots/journal.png" width="260" alt="Journal Screen"/></td>
+    <td><img src="./docs/screenshots/breathing.png" width="260" alt="Breathing Exercise"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>🎯 Focus Mode</strong></td>
+    <td align="center"><strong>⏰ Break Timer</strong></td>
+    <td align="center"><strong>✨ Motivational Quotes</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./docs/screenshots/focus.png" width="260" alt="Focus Mode"/></td>
+    <td><img src="./docs/screenshots/timer.png" width="260" alt="Break Timer"/></td>
+    <td><img src="./docs/screenshots/quotes.png" width="260" alt="Motivational Quotes"/></td>
+  </tr>
+</table>
 
 ---
 
