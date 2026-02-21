@@ -144,7 +144,7 @@ VITE_GEMINI_API_KEY=your-gemini-api-key
 
 ## 🎥 Demo Video
 
-[![Demo Video](https://img.shields.io/badge/Watch%20Demo-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/YOUR_VIDEO_LINK)
+https://drive.google.com/file/d/1PIbfmh_eC8u7FS_wdJ2-h2BpOnyoQupB/view?usp=sharing
 
 > _Walkthrough of all features including AI mood analysis, breathing exercises, and focus timer._
 
