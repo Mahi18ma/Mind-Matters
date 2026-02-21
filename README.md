@@ -224,7 +224,7 @@ This project is a **client-side only SPA** — there is no custom backend. All e
 | Name | Role | GitHub |
 |---|---|---|
 | Mahima | Full-Stack Developer & Designer | [@Mahi18ma](https://github.com/Mahi18ma) |
-| Sandra R S |Full-Stack Developer & Designer|
+| Sandra R S |Full-Stack Developer & Designer| [@SandraRS06](https://github.com/SandraRS06) |
 ---
 
 ## 📄 License
