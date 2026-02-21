@@ -128,6 +128,16 @@ VITE_GEMINI_API_KEY=your-gemini-api-key
     <td><img src="./docs/screenshots/timer.png" width="260" alt="Break Timer"/></td>
     <td><img src="./docs/screenshots/quotes.png" width="260" alt="Motivational Quotes"/></td>
   </tr>
+  <tr>
+    <td align="center"><strong>🌟 Daily Affirmations</strong></td>
+    <td align="center"><strong>📅 Mood Calendar</strong></td>
+    <td align="center"><strong>📊 Mood Stats</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./docs/screenshots/affirmations.png" width="260" alt="Daily Affirmations"/></td>
+    <td><img src="./docs/screenshots/calendar.png" width="260" alt="Mood Calendar"/></td>
+    <td><img src="./docs/screenshots/stats.png" width="260" alt="Mood Stats"/></td>
+  </tr>
 </table>
 
 ---
