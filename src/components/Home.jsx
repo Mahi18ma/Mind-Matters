@@ -34,13 +34,24 @@ export default function Home({ theme, user, onNav, onLogout }) {
     const streak = getStreak(entries);
     const lastMood = entries.length ? MOODS.find(m => m.emoji === entries[0].mood) : null;
 
+    // Streak milestone labels
+    const streakMilestone = streak >= 30 ? { label: '🏆 Legend', color: '#f59e0b' }
+        : streak >= 14 ? { label: '💎 Diamond', color: '#06b6d4' }
+            : streak >= 7 ? { label: '🔥 On Fire!', color: '#ef4444' }
+                : streak >= 3 ? { label: '⭐ Building', color: '#a855f7' }
+                    : streak >= 1 ? { label: '🌱 Starting', color: '#22c55e' }
+                        : null;
+
     const cards = [
         { id: 'nav-journal', emoji: '📓', label: 'Journal', sub: 'Write your thoughts', screen: 'journal', color: '#a855f7' },
-        { id: 'nav-face', emoji: '😊', label: 'Face Scan', sub: 'Detect your emotion', screen: 'face', color: '#10b981' },
+        { id: 'nav-breathe', emoji: '🧘', label: 'Breathe', sub: 'Guided breathing', screen: 'breathe', color: '#06b6d4' },
+        { id: 'nav-focus', emoji: '🎯', label: 'Focus Mode', sub: 'Deep work sessions', screen: 'focus', color: '#ef4444' },
         { id: 'nav-timer', emoji: '⏰', label: 'Break Timer', sub: 'Take a mindful break', screen: 'timer', color: '#ec4899' },
+        { id: 'nav-affirm', emoji: '🌟', label: 'Affirmations', sub: 'Daily positive words', screen: 'affirm', color: '#f59e0b' },
+        { id: 'nav-quotes', emoji: '✨', label: 'Quotes', sub: 'Get inspired now', screen: 'quotes', color: '#10b981' },
         { id: 'nav-graph', emoji: '📊', label: 'Mood Stats', sub: 'See your patterns', screen: 'graph', color: '#06b6d4' },
         { id: 'nav-calendar', emoji: '📅', label: 'Calendar', sub: 'Your mood history', screen: 'calendar', color: '#22c55e' },
-        { id: 'nav-prompt', emoji: '💭', label: 'Daily Prompt', sub: 'Reflect for a moment', screen: 'prompt', color: '#f59e0b' },
+        { id: 'nav-prompt', emoji: '💭', label: 'Daily Prompt', sub: 'Reflect for a moment', screen: 'prompt', color: '#8b5cf6' },
     ];
 
     return (
@@ -54,20 +65,42 @@ export default function Home({ theme, user, onNav, onLogout }) {
 
             {/* Stats Row */}
             <div style={{ display: 'flex', gap: 12, marginBottom: 28 }}>
-                {[
-                    { label: 'Day streak 🔥', value: streak },
-                    { label: 'Total entries', value: entries.length },
-                    { label: 'Last mood', value: lastMood ? lastMood.emoji : '—', isEmoji: true },
-                ].map((s, i) => (
-                    <div key={i} style={{
-                        flex: 1, background: theme.card + 'cc', border: `1px solid ${theme.cardBorder}`,
-                        borderRadius: 18, padding: '16px', boxShadow: theme.shadowCard, textAlign: 'center',
-                        backdropFilter: 'blur(10px)',
-                    }}>
-                        <div style={{ fontSize: s.isEmoji ? 28 : 28, fontWeight: s.isEmoji ? 400 : 800, color: theme.accent }}>{s.value}</div>
-                        <div style={{ fontSize: 12, color: theme.subtext, marginTop: 2 }}>{s.label}</div>
+                {/* Streak Card — enhanced */}
+                <div style={{
+                    flex: 1, borderRadius: 18, padding: '16px', textAlign: 'center',
+                    background: streakMilestone
+                        ? `linear-gradient(135deg, ${streakMilestone.color}22, ${streakMilestone.color}10)`
+                        : `${theme.card}cc`,
+                    border: `1px solid ${streakMilestone ? streakMilestone.color + '55' : theme.cardBorder}`,
+                    boxShadow: streakMilestone ? `0 4px 20px ${streakMilestone.color}22` : theme.shadowCard,
+                    backdropFilter: 'blur(10px)', transition: 'all 0.4s ease',
+                }}>
+                    <div style={{ fontSize: 28, fontWeight: 800, color: streakMilestone?.color || theme.accent }}>
+                        {streak}
                     </div>
-                ))}
+                    <div style={{ fontSize: 12, color: theme.subtext, marginTop: 2 }}>Day streak 🔥</div>
+                    {streakMilestone && (
+                        <div style={{
+                            marginTop: 6, fontSize: 10, fontWeight: 700,
+                            color: streakMilestone.color,
+                            background: streakMilestone.color + '22',
+                            borderRadius: 999, padding: '2px 8px', display: 'inline-block',
+                        }}>{streakMilestone.label}</div>
+                    )}
+                </div>
+
+                {[{ label: 'Total entries', value: entries.length },
+                { label: 'Last mood', value: lastMood ? lastMood.emoji : '—', isEmoji: true }]
+                    .map((s, i) => (
+                        <div key={i} style={{
+                            flex: 1, background: `${theme.card}cc`, border: `1px solid ${theme.cardBorder}`,
+                            borderRadius: 18, padding: '16px', boxShadow: theme.shadowCard, textAlign: 'center',
+                            backdropFilter: 'blur(10px)',
+                        }}>
+                            <div style={{ fontSize: 28, fontWeight: s.isEmoji ? 400 : 800, color: theme.accent }}>{s.value}</div>
+                            <div style={{ fontSize: 12, color: theme.subtext, marginTop: 2 }}>{s.label}</div>
+                        </div>
+                    ))}
             </div>
 
             {/* Quick Actions */}

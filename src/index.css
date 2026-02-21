@@ -25,7 +25,11 @@ input {
   font-family: 'Inter', sans-serif;
 }
 
-/* ── Animated Background Orbs ─────────────────────────────── */
+/* ══════════════════════════════════════════════════════
+   ANIMATED MESH-GRADIENT BACKGROUND
+   ══════════════════════════════════════════════════════ */
+
+/* Static mesh layer — sits behind the orbs */
 .orb-container {
   position: fixed;
   inset: 0;
@@ -34,73 +38,105 @@ input {
   overflow: hidden;
 }
 
+/* Shared orb defaults */
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.45;
-  animation: orbFloat linear infinite;
+  opacity: 0.55;
+  filter: blur(90px);
+  will-change: transform;
 }
 
-.orb-dark {
-  opacity: 0.35;
-}
-
+/* ── Light-mode orb colours ─────────────────────────── */
 .orb-1 {
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, #c084fc, #a855f7);
-  top: -120px;
-  left: -100px;
-  animation-duration: 18s;
-  animation-delay: 0s;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle at 40% 40%, #d946ef, #a855f7 60%, transparent);
+  top: -160px;
+  left: -140px;
+  animation: orbDrift1 20s ease-in-out infinite;
 }
 
 .orb-2 {
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, #f472b6, #ec4899);
-  top: 30%;
-  right: -120px;
-  animation-duration: 22s;
-  animation-delay: -6s;
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle at 60% 50%, #fb7185, #f43f5e 55%, transparent);
+  top: 25%;
+  right: -150px;
+  animation: orbDrift2 26s ease-in-out infinite;
 }
 
 .orb-3 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, #67e8f9, #06b6d4);
-  bottom: 15%;
-  left: -80px;
-  animation-duration: 26s;
-  animation-delay: -12s;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle at 50% 60%, #38bdf8, #0ea5e9 55%, transparent);
+  bottom: 10%;
+  left: -100px;
+  animation: orbDrift3 22s ease-in-out infinite;
 }
 
 .orb-4 {
-  width: 260px;
-  height: 260px;
-  background: radial-gradient(circle, #fde68a, #f59e0b);
-  bottom: -80px;
-  right: 10%;
-  animation-duration: 20s;
-  animation-delay: -4s;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle at 55% 45%, #fde68a, #fb923c 55%, transparent);
+  bottom: -100px;
+  right: 5%;
+  animation: orbDrift4 18s ease-in-out infinite;
 }
 
-@keyframes orbFloat {
+/* Extra centre bloom — light only */
+.orb-5 {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle at 50% 50%, #a5f3fc, #6ee7b7 60%, transparent);
+  top: 45%;
+  left: 30%;
+  animation: orbDrift2 30s ease-in-out infinite reverse;
+  opacity: 0.35;
+}
+
+/* ── Dark-mode orb adjustments ──────────────────────── */
+.orb-dark.orb-1 {
+  background: radial-gradient(circle at 40% 40%, #7c3aed, #4c1d95 60%, transparent);
+  opacity: 0.55;
+}
+
+.orb-dark.orb-2 {
+  background: radial-gradient(circle at 60% 50%, #be185d, #9d174d 55%, transparent);
+  opacity: 0.45;
+}
+
+.orb-dark.orb-3 {
+  background: radial-gradient(circle at 50% 60%, #0369a1, #075985 55%, transparent);
+  opacity: 0.45;
+}
+
+.orb-dark.orb-4 {
+  background: radial-gradient(circle at 55% 45%, #b45309, #92400e 55%, transparent);
+  opacity: 0.38;
+}
+
+.orb-dark.orb-5 {
+  background: radial-gradient(circle at 50% 50%, #134e4a, #065f46 60%, transparent);
+  opacity: 0.3;
+}
+
+/* ── Keyframes — each orb gets a unique path ────────── */
+@keyframes orbDrift1 {
   0% {
     transform: translate(0px, 0px) scale(1);
   }
 
-  25% {
-    transform: translate(30px, -40px) scale(1.05);
+  20% {
+    transform: translate(50px, -60px) scale(1.08);
   }
 
-  50% {
-    transform: translate(-20px, 50px) scale(0.95);
+  45% {
+    transform: translate(-30px, 70px) scale(0.93);
   }
 
-  75% {
-    transform: translate(40px, 20px) scale(1.03);
+  70% {
+    transform: translate(60px, 30px) scale(1.05);
   }
 
   100% {
@@ -108,23 +144,93 @@ input {
   }
 }
 
-/* ── Ensure content renders above orbs ───────────────────── */
+@keyframes orbDrift2 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  25% {
+    transform: translate(-50px, 40px) scale(1.06);
+  }
+
+  55% {
+    transform: translate(40px, -50px) scale(0.94);
+  }
+
+  80% {
+    transform: translate(-20px, 60px) scale(1.04);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes orbDrift3 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  30% {
+    transform: translate(40px, 50px) scale(1.07);
+  }
+
+  60% {
+    transform: translate(-60px, -30px) scale(0.92);
+  }
+
+  85% {
+    transform: translate(30px, -50px) scale(1.04);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes orbDrift4 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  35% {
+    transform: translate(-40px, -50px) scale(1.09);
+  }
+
+  65% {
+    transform: translate(50px, 40px) scale(0.91);
+  }
+
+  90% {
+    transform: translate(-30px, 20px) scale(1.05);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+/* ── Ensure content renders above orbs ─────────────── */
 #root>div>*:not(.orb-container) {
   position: relative;
   z-index: 1;
 }
 
-/* ── Range input ──────────────────────────────────────────── */
-input[type="range"] {
+/* ══════════════════════════════════════════════════════
+   RANGE INPUT
+   ══════════════════════════════════════════════════════ */
+input[type='range'] {
   -webkit-appearance: none;
+  appearance: none;
   height: 6px;
   border-radius: 999px;
   outline: none;
   cursor: pointer;
 }
 
-input[type="range"]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -133,12 +239,13 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 2px 8px rgba(168, 85, 247, 0.4);
 }
 
-/* ── Scroll ───────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════
+   SCROLL & ANIMATIONS
+   ══════════════════════════════════════════════════════ */
 html {
   scroll-behavior: smooth;
 }
 
-/* ── Fade-in animation ────────────────────────────────────── */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -148,5 +255,30 @@ html {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Shimmer for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
   }
 }

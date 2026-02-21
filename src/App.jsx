@@ -11,14 +11,20 @@ import TimerScreen from './components/TimerScreen.jsx';
 import GraphScreen from './components/GraphScreen.jsx';
 import PromptScreen from './components/PromptScreen.jsx';
 import CalendarView from './components/CalendarView.jsx';
-import FaceEmotion from './components/FaceEmotion.jsx';
+import BreathingScreen from './components/BreathingScreen.jsx';
+import FocusTimer from './components/FocusTimer.jsx';
+import AffirmationsScreen from './components/AffirmationsScreen.jsx';
+import QuotesScreen from './components/QuotesScreen.jsx';
 import { listenEntries } from './utils/db.js';
 
 const NAV = [
     { id: 'tab-home', screen: 'home', emoji: '🏠', label: 'Home' },
     { id: 'tab-journal', screen: 'journal', emoji: '📓', label: 'Journal' },
-    { id: 'tab-face', screen: 'face', emoji: '😊', label: 'Face' },
+    { id: 'tab-breathe', screen: 'breathe', emoji: '🧘', label: 'Breathe' },
+    { id: 'tab-focus', screen: 'focus', emoji: '🎯', label: 'Focus' },
     { id: 'tab-timer', screen: 'timer', emoji: '⏰', label: 'Timer' },
+    { id: 'tab-affirm', screen: 'affirm', emoji: '🌟', label: 'Affirm' },
+    { id: 'tab-quotes', screen: 'quotes', emoji: '✨', label: 'Quotes' },
     { id: 'tab-calendar', screen: 'calendar', emoji: '📅', label: 'Calendar' },
     { id: 'tab-graph', screen: 'graph', emoji: '📊', label: 'Stats' },
 ];
@@ -79,6 +85,7 @@ export default function App() {
             <div className={`orb orb-2 ${dark ? 'orb-dark' : ''}`} />
             <div className={`orb orb-3 ${dark ? 'orb-dark' : ''}`} />
             <div className={`orb orb-4 ${dark ? 'orb-dark' : ''}`} />
+            <div className={`orb orb-5 ${dark ? 'orb-dark' : ''}`} />
         </div>
     );
 
@@ -109,7 +116,10 @@ export default function App() {
             case 'graph': return <GraphScreen theme={theme} user={user} />;
             case 'prompt': return <PromptScreen theme={theme} user={user} />;
             case 'calendar': return <CalendarView theme={theme} entries={calEntries} />;
-            case 'face': return <FaceEmotion theme={theme} />;
+            case 'breathe': return <BreathingScreen theme={theme} />;
+            case 'focus': return <FocusTimer theme={theme} />;
+            case 'affirm': return <AffirmationsScreen theme={theme} />;
+            case 'quotes': return <QuotesScreen theme={theme} />;
             default: return <Home theme={theme} user={user} onNav={setScreen} onLogout={handleLogout} />;
         }
     };
@@ -140,25 +150,27 @@ export default function App() {
                 {renderScreen()}
             </div>
 
-            {/* Bottom Nav */}
+            {/* Bottom Nav — horizontally scrollable */}
             <nav style={{
                 position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)',
                 width: '100%', maxWidth: 480,
-                background: theme.navBg + 'dd',
+                background: theme.navBg + 'ee',
                 borderTop: `1px solid ${theme.navBorder}`,
-                display: 'flex', zIndex: 100, backdropFilter: 'blur(16px)',
+                display: 'flex', overflowX: 'auto', zIndex: 100, backdropFilter: 'blur(16px)',
+                scrollbarWidth: 'none',
+                WebkitOverflowScrolling: 'touch',
             }}>
                 {NAV.map(n => (
                     <button key={n.screen} id={n.id} onClick={() => setScreen(n.screen)}
                         style={{
-                            flex: 1, padding: '10px 4px 12px', background: 'transparent',
+                            flex: '0 0 auto', minWidth: 64, padding: '10px 8px 12px', background: 'transparent',
                             border: 'none', cursor: 'pointer', display: 'flex',
                             flexDirection: 'column', alignItems: 'center', gap: 3,
-                            fontFamily: 'Inter, sans-serif', transition: 'opacity 0.15s',
+                            fontFamily: 'Inter, sans-serif', transition: 'all 0.15s',
                         }}>
-                        <span style={{ fontSize: 20 }}>{n.emoji}</span>
+                        <span style={{ fontSize: 19 }}>{n.emoji}</span>
                         <span style={{
-                            fontSize: 10, fontWeight: screen === n.screen ? 700 : 400,
+                            fontSize: 9, fontWeight: screen === n.screen ? 700 : 400,
                             color: screen === n.screen ? theme.accent : theme.subtext,
                             letterSpacing: 0.3,
                         }}>{n.label}</span>
